@@ -5,12 +5,16 @@ FILE_TYPES = {}
 FILE_TYPES.FILE = "FILE"
 FILE_TYPES.FOLDER = "FOLDER"
 
+<<<<<<< HEAD
 storedFiles = []
 
+=======
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 File = {}
 File.file = null
 File.setPermissions = function (newPermissions, recersive = false)
     result = self.file.chmod(newPermissions, recersive)
+<<<<<<< HEAD
     if typeof(result) == "string" then return Error.New(result)
     return result
 end function
@@ -23,6 +27,17 @@ File.setGroup = function (newGroup, recersive = false)
     result = self.file.set_group(newGroup, recersive)
     if typeof(result) == "string" then return Error.New(result)
     return result
+=======
+    if result.len() > 0 then return Error.New(result)
+end function
+File.setOwner = function (newOwner, recersive = false)
+    result = self.file.set_owner(newOwner, recersive)
+    if result.len() > 0 then return Error.New(result)
+end function
+File.setGroup = function (newGroup, recersive = false)
+    result = self.file.set_group(newGroup, recersive)
+    if result.len() > 0 then return Error.New(result)
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 end function
 File.hasPermission = function (permission)
     return self.file.has_permission(permission)
@@ -121,6 +136,7 @@ end function
 File.group = function ()
     return self.file.group()
 end function
+<<<<<<< HEAD
 File.getFiles = function ()
     return storedFiles
 end function
@@ -134,6 +150,8 @@ File.getLastFile = function ()
         return Error.New("No files stored")
     end if
 end function
+=======
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 File.New = function (file)
     if typeof(file) != "file" then return Error.New("Not able to create file object from non file object")
     result = new self

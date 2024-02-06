@@ -20,6 +20,7 @@ Computer.closeProcess = function(pid)
     result = self.computer.close_program(to_int(pid))
     if typeof(result) == "string" then return Error.New(result)
 end function
+<<<<<<< HEAD
 Computer.closeAllProcesses = function()
     processes = self.computer.show_procs()
     processes = processes.split(char(10))[1:]
@@ -29,6 +30,8 @@ Computer.closeAllProcesses = function()
         if typeof(result) == "string" and result != "Permission denied. Process protected." then return Error.New(result)
     end for
 end function
+=======
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 Computer.createFolder = function(path, name)
     result = self.computer.create_folder(path, name)
     if typeof(result) == "string" then return Error.New(result)

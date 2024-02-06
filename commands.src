@@ -169,6 +169,7 @@ commandManager.registerCommand(Command.New({
     "callback": @chgrpCommandHandler
 }))
 
+<<<<<<< HEAD
 whoisCommandHandler = function (params)
     sessionManager = extensionMediator.getExtension("sessionManager")
     session = sessionManager.currentSession
@@ -187,6 +188,31 @@ commandManager.registerCommand(Command.New({
         })
     ],
     "callback": @whoisCommandHandler
+=======
+mvCommandHandler = function(params)
+    sessionManager = extensionMediator.getExtension("sessionManager")
+    session = sessionManager.currentSession
+    handler = session.handler
+    path = params.path
+    newPath = params.newPath
+
+    return handler.move(path, newPath)
+end function
+commandManager.registerCommand(Command.New({
+    "name": "mv",
+    "description": "Move a file or directory",
+    "parameters": [
+        Parameter.New({
+            "name": "path",
+            "required": true
+        }),
+        Parameter.New({
+            "name": "newPath",
+            "required": true
+        })
+    ],
+    "callback": @mvCommandHandler
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 }))
 
 writeCommandHandler = function(params)
@@ -231,6 +257,10 @@ commandManager.registerCommand(Command.New({
     "callback": @writeCommandHandler
 }))
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 corruptLogsCommandHandler = function(params)
     sessionManager = extensionMediator.getExtension("sessionManager")
     session = sessionManager.currentSession
@@ -486,6 +516,7 @@ commandManager.registerCommand(Command.New({
     }
 }))
 
+<<<<<<< HEAD
 adduserCommandHandler = function(params)
     sessionManager = extensionMediator.getExtension("sessionManager")
     session = sessionManager.currentSession
@@ -543,6 +574,8 @@ commandManager.registerCommand(Command.New({
     }
 }))
 
+=======
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 passwdCommandHandler = function(params)
     sessionManager = extensionMediator.getExtension("sessionManager")
     session = sessionManager.currentSession
@@ -1135,6 +1168,7 @@ killCommandHandler = function(params)
     currentSession = sessionManager.currentSession
     currentHandler = currentSession.handler
 
+<<<<<<< HEAD
     pid = params["pid|all"]
 
     if pid == "all" then
@@ -1143,14 +1177,38 @@ killCommandHandler = function(params)
         result = currentHandler.closeProcess(pid)
     end if
     if result isa Error then return result
+=======
+    pid = params.pid
+
+    if pid == "all" then
+        processes = currentHandler.processes()
+        handleKillProcess = function(process)
+            currentHandler.closeProcess(process.PID)
+        end function
+        forEach(processes, @handleKillProcess)
+    else
+        result = currentHandler.closeProcess(pid)
+        if result isa Error then return result
+    end if
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 end function
 commandManager.registerCommand(Command.New({
     "name": "kill",
     "description": "Kill a process",
     "parameters": [
+<<<<<<< HEAD
         Parameter.New({
             "name": "pid|all",
             "required": true
+=======
+        OptionsParameter.New({
+            "name": "pid",
+            "required": true,
+            "options": {
+                "pid": null,
+                "all": "all"
+            }
+>>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
         })
     ],
     "callback": @killCommandHandler,
