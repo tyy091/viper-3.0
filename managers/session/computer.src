@@ -14,12 +14,9 @@ end function
 ComputerSession.closeProcess = function (pid)
     return self.computer.closeProcess(pid)
 end function
-<<<<<<< HEAD
 ComputerSession.closeAllProcesses = function ()
     return self.computer.closeAllProcesses()
 end function
-=======
->>>>>>> 167df025fc76912d37cd39a84d84d717895b386c
 ComputerSession.createFolder = function (path)
     splitPath = path.split("/")
     name = splitPath.pop()
