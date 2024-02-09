@@ -189,6 +189,31 @@ commandManager.registerCommand(Command.New({
     "callback": @whoisCommandHandler
 }))
 
+mvCommandHandler = function(params)
+    sessionManager = extensionMediator.getExtension("sessionManager")
+    session = sessionManager.currentSession
+    handler = session.handler
+    path = params.path
+    newPath = params.newPath
+
+    return handler.move(path, newPath)
+end function
+commandManager.registerCommand(Command.New({
+    "name": "mv",
+    "description": "Move a file or directory",
+    "parameters": [
+        Parameter.New({
+            "name": "path",
+            "required": true
+        }),
+        Parameter.New({
+            "name": "newPath",
+            "required": true
+        })
+    ],
+    "callback": @mvCommandHandler
+}))
+
 writeCommandHandler = function(params)
     sessionManager = extensionMediator.getExtension("sessionManager")
     session = sessionManager.currentSession
