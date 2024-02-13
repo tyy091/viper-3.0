@@ -189,6 +189,31 @@ commandManager.registerCommand(Command.New({
     "callback": @whoisCommandHandler
 }))
 
+mvCommandHandler = function(params)
+    sessionManager = extensionMediator.getExtension("sessionManager")
+    session = sessionManager.currentSession
+    handler = session.handler
+    path = params.path
+    newPath = params.newPath
+
+    return handler.move(path, newPath)
+end function
+commandManager.registerCommand(Command.New({
+    "name": "mv",
+    "description": "Move a file or directory",
+    "parameters": [
+        Parameter.New({
+            "name": "path",
+            "required": true
+        }),
+        Parameter.New({
+            "name": "newPath",
+            "required": true
+        })
+    ],
+    "callback": @mvCommandHandler
+}))
+
 writeCommandHandler = function(params)
     sessionManager = extensionMediator.getExtension("sessionManager")
     session = sessionManager.currentSession
@@ -1273,6 +1298,41 @@ commandManager.registerCommand(Command.New({
         })
     ],
     "callback": @addAliasCommandHandler
+}))
+
+delAliasCommandHandler = function(params)
+    commandManager = extensionMediator.getExtension("commandManager")
+    alias = params.alias
+
+    commandManager.removeAlias(alias)
+end function
+commandManager.registerCommand(Command.New({
+    "name": "delalias",
+    "description": "Deletes an alias",
+    "parameters": [
+        Parameter.New({
+            "name": "alias",
+            "required": true
+        })
+    ],
+    "callback": @delAliasCommandHandler
+}))
+
+aliasesCommandHandler = function(params)
+    commandManager = extensionMediator.getExtension("commandManager")
+
+    aliases = commandManager.aliases
+
+    for alias in aliases
+        print alias.key + ": " + alias.value
+    end for
+end function
+commandManager.registerCommand(Command.New({
+    "name": "aliases",
+    "description": "Prints all aliases.",
+    "parameters": [
+    ],
+    "callback": @aliasesCommandHandler
 }))
 
 nsLookupCommandHandler = function(params)
